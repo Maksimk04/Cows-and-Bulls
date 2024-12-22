@@ -2,13 +2,13 @@ package CowsAndBulls;
 
 import java.util.Random;
 
-public class SingleGame extends javax.swing.JFrame {
+public class MultiplayerClient extends javax.swing.JFrame {
     
     String seq = "1234";
     Match game;
 
     
-    public SingleGame() {
+    public MultiplayerClient() {
         initComponents();
         this.setLocationRelativeTo(null);
         int num;
@@ -19,14 +19,6 @@ public class SingleGame extends javax.swing.JFrame {
             } 
         }
         seq = Integer.toString(num);
-        game = new Match(seq);
-    }
-    
-    public SingleGame(String sequence) {
-        initComponents();
-        this.setLocationRelativeTo(null);
-        int num;
-        seq = sequence;
         game = new Match(seq);
     }
 

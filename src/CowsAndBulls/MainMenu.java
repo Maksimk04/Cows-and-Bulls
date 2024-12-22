@@ -8,6 +8,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     public MainMenu() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
     @SuppressWarnings("unchecked")
@@ -86,7 +87,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void NetworkMatchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NetworkMatchBtnActionPerformed
         dispose();
-        new SingleGame().setVisible(true);
+        new ChooseHostOrClent().setVisible(true);
 
     }//GEN-LAST:event_NetworkMatchBtnActionPerformed
 

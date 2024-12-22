@@ -4,6 +4,7 @@ public class MakeNumber extends javax.swing.JFrame {
 
     public MakeNumber() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -64,7 +65,7 @@ public class MakeNumber extends javax.swing.JFrame {
 
     private void SubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitBtnActionPerformed
         // TODO add your handling code here:
-        String seq = SequenceText.getText();
+        String seq = SequenceText.getText().trim();
         if (Match.checkSeq(seq)) {
             dispose();
             new SingleGame(seq).setVisible(true);

@@ -1,14 +1,26 @@
 package CowsAndBulls;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Random;
 
-public class SingleGame extends javax.swing.JFrame {
+public class MultiplayerServer extends javax.swing.JFrame {
     
     String seq = "1234";
     Match game;
+    
+    private ServerSocket serverSocket;
+    private Socket clientSocket;
+    private PrintWriter out;
+    private BufferedReader in;
 
     
-    public SingleGame() {
+    public MultiplayerServer(int port) {
+        /// for host
         initComponents();
         this.setLocationRelativeTo(null);
         int num;
@@ -20,14 +32,44 @@ public class SingleGame extends javax.swing.JFrame {
         }
         seq = Integer.toString(num);
         game = new Match(seq);
+        
+        try {
+            serverSocket = new ServerSocket(port);
+            System.out.println("Сервер запущен на порту " + port);
+            clientSocket = serverSocket.accept();
+            System.out.println("Клиент подключился");
+
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        } catch (IOException e) {
+            //TODO
+            // add error message
+            dispose();
+            new MainMenu().setVisible(true);
+        }
+
+        
     }
     
-    public SingleGame(String sequence) {
+    public MultiplayerServer(String serverIp, int port) {
+        /// for client
         initComponents();
         this.setLocationRelativeTo(null);
-        int num;
-        seq = sequence;
-        game = new Match(seq);
+
+        try {
+            clientSocket = new Socket(serverIp, port);
+            System.out.println("Подключение к серверу...");
+
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            System.out.println("Подключились по " + serverIp + ":" + port);
+        } catch (IOException e) {
+            //TODO
+            // add error message
+            dispose();
+            new MainMenu().setVisible(true);
+        }
+
     }
 
     @SuppressWarnings("unchecked")

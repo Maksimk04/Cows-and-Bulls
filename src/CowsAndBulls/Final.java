@@ -3,6 +3,7 @@ package CowsAndBulls;
 public class Final extends javax.swing.JFrame {
     public Final(int turnCount) {
         initComponents();
+        this.setLocationRelativeTo(null);
         TurnCountText.setText("Количество попыток: " + Integer.toString(turnCount));
     }
 

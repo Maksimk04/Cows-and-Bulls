@@ -24,7 +24,7 @@ public class StartMenu extends JFrame {
         JButton networkGameButton = new JButton("Сетевая игра");
         networkGameButton.addActionListener(e -> {
             dispose();
-            new MainMenu();
+            new NetworkGameMenu();
         });
 
         add(localGameButton);
