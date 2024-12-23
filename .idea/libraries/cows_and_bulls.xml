@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="ultra-tic-tac-toe">
+  <library name="cows-and-bulls">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/slf4j-simple-1.7.32.jar!/" />
       <root url="jar://$PROJECT_DIR$/sqlite-jdbc-3.46.0.0.jar!/" />
