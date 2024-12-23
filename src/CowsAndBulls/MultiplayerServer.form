@@ -37,7 +37,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton1" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="StartBtn" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Component id="GuessTextArea" min="-2" pref="204" max="-2" attributes="0"/>
@@ -63,9 +62,7 @@
               <Component id="BullsText" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="ExitToMainMenuBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="StartBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <EmptySpace pref="47" max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -147,15 +144,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="StartBtn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#x41d;&#x430;&#x447;&#x430;&#x442;&#x44c; &#x438;&#x433;&#x440;&#x443;"/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="StartBtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
