@@ -118,6 +118,7 @@ public class MultiplayerServer extends javax.swing.JFrame {
         CowsText = new javax.swing.JLabel();
         BullsText = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        StartBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Одиночная игра");
@@ -161,6 +162,14 @@ public class MultiplayerServer extends javax.swing.JFrame {
             }
         });
 
+        StartBtn.setText("Начать игру");
+        StartBtn.setToolTipText("");
+        StartBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,17 +185,14 @@ public class MultiplayerServer extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(guess, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(StartBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(39, 39, 39)
                 .addComponent(GuessTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(GuessTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
@@ -198,11 +204,17 @@ public class MultiplayerServer extends javax.swing.JFrame {
                 .addComponent(submitBtn)
                 .addGap(18, 18, 18)
                 .addComponent(CowsText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BullsText)
                 .addGap(18, 18, 18)
                 .addComponent(ExitToMainMenuBtn)
-                .addGap(36, 36, 36))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(StartBtn)
+                .addContainerGap(12, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(GuessTextArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -252,12 +264,28 @@ public class MultiplayerServer extends javax.swing.JFrame {
         guess.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void StartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            clientSocket = serverSocket.accept();
+            System.out.println("Клиент подключился");
+            if (serverSocket != null && !serverSocket.isClosed()) {
+                serverSocket.close();
+            }
+        } catch (IOException e) {
+            //System.err.println("Ошибка при закрытии соединения: " + e.getMessage());
+        }
+        
+            
+    }//GEN-LAST:event_StartBtnActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BullsText;
     private javax.swing.JLabel CowsText;
     private javax.swing.JButton ExitToMainMenuBtn;
     private java.awt.TextArea GuessTextArea;
+    private javax.swing.JButton StartBtn;
     private java.awt.TextField guess;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
