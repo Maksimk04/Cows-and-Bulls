@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MultiplayerServer extends javax.swing.JFrame {
     
@@ -20,6 +22,8 @@ public class MultiplayerServer extends javax.swing.JFrame {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
+    
+    static ExecutorService executeIt = Executors.newFixedThreadPool(2);
 
     
     public MultiplayerServer(int port) {
@@ -54,9 +58,7 @@ public class MultiplayerServer extends javax.swing.JFrame {
             dispose();
             new MainMenu().setVisible(true);
         }
-
     }
-   
     
     private void listenForMoves() {
         new Thread(() -> {
@@ -185,10 +187,6 @@ public class MultiplayerServer extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(GuessTextArea, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
@@ -199,11 +197,15 @@ public class MultiplayerServer extends javax.swing.JFrame {
                 .addComponent(submitBtn)
                 .addGap(18, 18, 18)
                 .addComponent(CowsText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BullsText)
                 .addGap(18, 18, 18)
                 .addComponent(ExitToMainMenuBtn)
-                .addGap(36, 36, 36))
+                .addContainerGap(47, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(GuessTextArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
