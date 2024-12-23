@@ -12,6 +12,9 @@ public class MultiplayerServer extends javax.swing.JFrame {
     
     String seq = "1234";
     Match game;
+    int currentPlayer;
+    boolean isHost;
+    // 1 - host, 2 - client
     
     private ServerSocket serverSocket;
     private Socket clientSocket;
@@ -32,6 +35,8 @@ public class MultiplayerServer extends javax.swing.JFrame {
         }
         seq = Integer.toString(num);
         game = new Match(seq);
+        currentPlayer = 1;
+        isHost = true;
         
         try {
             serverSocket = new ServerSocket(port);
@@ -41,6 +46,8 @@ public class MultiplayerServer extends javax.swing.JFrame {
 
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            out.println("seq:" + seq);
+            listenForMoves();
         } catch (IOException e) {
             //TODO
             // add error message
@@ -48,28 +55,55 @@ public class MultiplayerServer extends javax.swing.JFrame {
             new MainMenu().setVisible(true);
         }
 
-        
+    }
+   
+    
+    private void listenForMoves() {
+        new Thread(() -> {
+            try {
+                String move;
+                while ((move = in.readLine()) != null) {
+                    
+                    if (currentPlayer == 1) continue;
+                    String parts = move.trim();
+
+                    GuessTextArea.append("Ход противника: " + parts + "\n\n");
+                    game.checkAttemp(parts);
+                    if (game.bulls == 4) {
+                        //TODO
+                        //opponent won
+                        GuessTextArea.append("Противник выиграл!\n");
+                    }
+                    currentPlayer = 1;
+                    
+                }
+            } catch (IOException e) {
+                // не судьба
+                closeConnection();
+                dispose();
+                new MainMenu().setVisible(true);
+            }
+        }).start();
     }
     
-    public MultiplayerServer(String serverIp, int port) {
-        /// for client
-        initComponents();
-        this.setLocationRelativeTo(null);
-
+    public void closeConnection() {
         try {
-            clientSocket = new Socket(serverIp, port);
-            System.out.println("Подключение к серверу...");
-
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            System.out.println("Подключились по " + serverIp + ":" + port);
+            if (in != null) {
+                in.close();
+            }
+            if (out != null) {
+                out.close();
+            }
+            if (clientSocket != null && !clientSocket.isClosed()) {
+                clientSocket.close();
+            }
+            if (serverSocket != null && !serverSocket.isClosed()) {
+                serverSocket.close();
+            }
+            System.out.println("Соединение закрыто.");
         } catch (IOException e) {
-            //TODO
-            // add error message
-            dispose();
-            new MainMenu().setVisible(true);
+            //System.err.println("Ошибка при закрытии соединения: " + e.getMessage());
         }
-
     }
 
     @SuppressWarnings("unchecked")
@@ -175,6 +209,7 @@ public class MultiplayerServer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        if (currentPlayer == 2) return;
         String guessNum = guess.getText();
         
         if (!game.checkSeq(guessNum)) {
@@ -189,6 +224,7 @@ public class MultiplayerServer extends javax.swing.JFrame {
         game.checkAttemp(guessNum);
         CowsText.setText("Коров: " + Integer.toString(game.cows));
         BullsText.setText("Быков: " + Integer.toString(game.bulls));
+        out.println(guessNum);
         
         if (game.bulls == 4) {
             // TODO
@@ -204,6 +240,7 @@ public class MultiplayerServer extends javax.swing.JFrame {
         game.turnCount++;
         guess.setText("");
         guess.requestFocus();
+        currentPlayer = 2;
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void ExitToMainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitToMainMenuBtnActionPerformed

@@ -86,7 +86,7 @@ public class ConnectToServer extends javax.swing.JFrame {
             int port = Integer.parseInt(portText.getText().trim());
 
             dispose();
-            new MultiplayerServer(serverIp, port).setVisible(true);
+            new MultiplayerClient(serverIp, port).setVisible(true);
         } catch (Exception ex) {
             errorText.setText("Произошла ошибка!");
         }
