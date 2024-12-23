@@ -20,6 +20,7 @@ public class ConnectToServer extends javax.swing.JFrame {
         BackBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("¬ведите IP адрес сервера:");

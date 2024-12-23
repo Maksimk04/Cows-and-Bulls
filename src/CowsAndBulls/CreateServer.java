@@ -27,6 +27,7 @@ public class CreateServer extends javax.swing.JFrame {
         backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         ipText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ipText.setText("Ваш IP адрес: ");

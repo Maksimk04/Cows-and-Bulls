@@ -17,6 +17,7 @@ public class ChooseHostOrClent extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Выбор подключения");
+        setResizable(false);
 
         Host.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Host.setText("Создать сервер");
